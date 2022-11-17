@@ -16,7 +16,6 @@ CREATE TABLE KelDigitalBank.Accounts (
 
 CREATE TABLE KelDigitalBank.Transactions (
   id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  name TEXT NOT NULL,
   value TEXT NOT NULL,
   debitedAccountId TEXT NOT NULL,
   creditedAccountId TEXT NOT NULL,
