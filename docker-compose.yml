@@ -2,17 +2,13 @@ version: '3'
 
 services:
   database:
-    image: mysql:8.0.21
+    image: postgres
     container_name: db
     ports:
-      - 3002:3306
+      - 3002:5432
     environment:
-      - MYSQL_ROOT_PASSWORD=SenhaMuitoSegura!123
+      - POSTGRES_PASSWORD=SenhaMuitoSegura!123
     restart: 'always'
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
-      timeout: 10s
-      retries: 5
 
   api:
     build: ./backend
@@ -20,15 +16,14 @@ services:
     ports:
       - 3001:3001
     depends_on:
-      database:
-        condition: service_healthy
+      - database
     environment:
       - PORT=3001
-      - DB_USER=root
+      - DB_USER=postgres
       - DB_PASS=SenhaMuitoSegura!123
       - DB_HOST=db
       - DB_NAME=KelDigitalBank
-      - DB_PORT=3306
+      - DB_PORT=5432
     volumes:
       - ./backend:/app-back
 
