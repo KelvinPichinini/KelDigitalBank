@@ -18,7 +18,7 @@ Account.init({
   balance: {
     type: STRING,
     allowNull:false,
-    defaultValue: '100,00'
+    defaultValue: '100.00'
   }
 
 },{

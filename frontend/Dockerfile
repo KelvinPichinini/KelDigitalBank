@@ -1,11 +1,11 @@
 FROM node:16-alpine
 
-WORKDIR /app-front
+# WORKDIR /app-front
 
-COPY package.json ./
+# COPY package.json ./
 
-RUN npm install --silent
+# RUN npm install --silent
 
-COPY . .
+# COPY . .
 
-CMD [ "npm", "run", "dev" ]
+# CMD [ "npm", "run", "dev" ]

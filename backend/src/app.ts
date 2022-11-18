@@ -1,17 +1,24 @@
-import express, { Request, Response } from 'express';
-import Account from './database/models/account';
-import Transaction from './database/models/transaction';
-import User from './database/models/user';
-import errorMiddleware from './middleware/errorMiddleware';
+import express from 'express';
+import { auth } from './middleware/auth';
+import { signUpValidation } from './middleware/signUpValidation';
+import { accountInfo, login, signup } from './controllers/user.controller';
+import { transactions, transfer } from './controllers/transactions.controller';
+import { transferValidation } from './middleware/transferValidation';
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/', async (req: Request, res: Response) => {
-  return res.status(200).send(' DB MODELADO!');
-})
+app.post('/login',login)
 
-app.use(errorMiddleware)
+app.post('/signup',signUpValidation, signup)
+
+app.post('/transfer',auth,transferValidation, transfer)
+
+app.get('/accountInfo',auth, accountInfo)
+
+
+app.get('/transactions',auth, transactions)
+
 
 export default app;
