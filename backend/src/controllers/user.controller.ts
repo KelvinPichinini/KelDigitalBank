@@ -17,7 +17,6 @@ export const signup = async (req:Request, res:Response, next:NextFunction) => {
   const { username, password } = req.body;
   if( username && password) {
     const newUser = await userService.createUser(username, password)
-    console.log(newUser)
     if (newUser){
       const loginAttempt = await userService.login(username, password)
       return res.status(200).send(loginAttempt)
@@ -28,4 +27,13 @@ export const signup = async (req:Request, res:Response, next:NextFunction) => {
 
 export const accountInfo = async (req:CustomRequest, res:Response, next:NextFunction) => {
   return res.status(200).send(req.user)
+}
+
+export const userByAccountId = async (req:CustomRequest, res:Response, next:NextFunction) => {
+  const { id } = req.body
+  const response = await userService.getUserByAccountId(parseInt(id))
+  if (response.message != 'ok'){
+    return res.status(404).json(response.message)
+  }
+  return res.status(200).json(response.username)
 }

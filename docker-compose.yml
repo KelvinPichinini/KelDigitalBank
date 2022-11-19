@@ -28,12 +28,12 @@ services:
       - ./backend:/app-back
 
   web:
-    build: ./frontend
+    build: ./kel-digital
     container_name: web
     ports:
       - 3000:3000
     depends_on:
       - api
     volumes:
-      - ./backend:/app-front
+      - ./kel-digital:/app-front
 

@@ -1,0 +1,6 @@
+export const POST_LOGIN = 'http://localhost:3001/login'
+export const GET_ACCOUNT_INFO = 'http://localhost:3001/accountInfo'
+export const GET_ALL_TRANSACTIONS = 'http://localhost:3001/transactions'
+export const POST_TRANSACTION = 'http://localhost:3001/transfer'
+export const POST_NEW_USER = 'http://localhost:3001/signup'
+export const GET_USERNAME_BY_ACCOUNT_ID = 'http://localhost:3001/userByAccountId'

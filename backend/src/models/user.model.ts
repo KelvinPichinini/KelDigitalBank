@@ -55,5 +55,16 @@ export const userModel = {
     return users
   },
 
+  async getUserByAccountId(id:number): Promise<string | null> {
+    const user = await User.findOne({
+      where: { accountId: id },
+      attributes: { exclude: ['password','id','accountId']},
+    })
+    if(user){
+      return user.username
+    }
+    return null
+  },
+
 
 }

@@ -59,5 +59,17 @@ export const userService = {
     else {
       return userFound
     }
-  }
+  },
+
+  async getUserByAccountId(id:number) {
+    const userFound = await userModel.getUserByAccountId(id)
+    if(!userFound){
+      return { username:'', message: 'Usuário não encontrado' }
+    }
+    else {
+      return { username: userFound, message: 'ok'}
+    }
+  },
+
+
 }
