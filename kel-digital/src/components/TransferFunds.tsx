@@ -5,7 +5,6 @@ import User from '../interfaces/user.interface';
 import { getUserInfo, postTransfer } from '../services/requisitions';
 
 export default function TransferFunds() {
-  const [redirect, setRedirect] =  useState(false)
   const [user, setUser] = useState<User>()
   const [transfer, setTransfer] = useState({username:'', value:''})
   const [error, setError] =  useState(false)
@@ -17,9 +16,7 @@ export default function TransferFunds() {
   useEffect( () => {
     const getUser = async () => {
       const result = await getUserInfo();
-      if( result.message !== 'ok') {
-        setRedirect(true)
-      } else {
+      if( result.message === 'ok') {
         setUser(result)
       }
     }
@@ -56,12 +53,9 @@ export default function TransferFunds() {
       setErrorMessage('');
       setTransfer({username:'', value:''});
       const result = await getUserInfo();
-      if( result.message !== 'ok') {
-        setRedirect(true)
-      } else {
+      if( result.message === 'ok') {
         setUser(result)
-      }
-            
+      }           
       
     }
   }
@@ -70,16 +64,6 @@ export default function TransferFunds() {
         <div className='transfer'>
           <h1 className='transfer-title'>Transferir</h1> 
               <input value={transfer.username} onChange={handleChange} name='username' className="transfer-input" type="username" placeholder="Usuário" />
-              <Alert variant={toastType} onClose={() => {
-                setError(false)
-                setSuccess(false)
-                }}
-                dismissible>
-                <Alert.Heading>{alertMessage}</Alert.Heading>
-                <p>
-                  { errorMessage }
-                </p>
-              </Alert>
               <CurrencyInput
                 onChange={handleChange}
                 className='transfer-input'
@@ -96,6 +80,16 @@ export default function TransferFunds() {
                 enviar
               </Button>
               <h4 className='balance'>Saldo: R${user?.account.balance}</h4>    
+              <Alert variant={toastType} onClose={() => {
+                setError(false)
+                setSuccess(false)
+                }}
+                dismissible>
+                <Alert.Heading>{alertMessage}</Alert.Heading>
+                <p>
+                  { errorMessage }
+                </p>
+              </Alert>
         </div>
       )
     }

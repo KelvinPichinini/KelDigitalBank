@@ -94,6 +94,11 @@ body {
   margin-left: 10%;
 }
 
+.logout-btn:hover {
+  align-self:flex-end;
+  margin-left: 10%;
+}
+
 .separator {
   height: 1px;
   background-color: black;

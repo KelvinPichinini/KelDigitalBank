@@ -30,8 +30,8 @@ export const accountInfo = async (req:CustomRequest, res:Response, next:NextFunc
 }
 
 export const userByAccountId = async (req:CustomRequest, res:Response, next:NextFunction) => {
-  const { id } = req.body
-  const response = await userService.getUserByAccountId(parseInt(id))
+  const { id } = req.query
+  const response = await userService.getUserByAccountId(parseInt(id as string ))
   if (response.message != 'ok'){
     return res.status(404).json(response.message)
   }

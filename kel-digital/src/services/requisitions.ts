@@ -20,10 +20,10 @@ export const getUserByAccountId = async(id:number) => {
     const user = JSON.parse(localStorage.getItem('user') as string)
   try {
     const res = await axios.get(GET_USERNAME_BY_ACCOUNT_ID,{params:{id:id}, headers:{'Authorization':user.token}})
-    return {...res.data, message:'ok'}
+    return res
   } catch (error) {
     if(axios.isAxiosError(error)) {
-      return {message:error.response?.data.message}
+      return error.response?.data.message
     }
     }
   }
@@ -31,12 +31,10 @@ export const getUserByAccountId = async(id:number) => {
 
 export const postTransfer = async(username:string, value:string, token:string) => {
   try {
-    console.log(token)
     const res = await axios.post(POST_TRANSACTION,{creditedAccountUsername:username,value:value},{headers:{'Authorization':token}})
     return res.data
   } catch (error) {
       if(axios.isAxiosError(error)) {
-        console.log(error)
         return {message:error.response?.data.message}
       }
     }
