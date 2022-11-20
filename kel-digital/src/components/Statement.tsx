@@ -4,7 +4,12 @@ import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import Transaction from './Transaction';
 
-export default function Statement () {
+type Props1 = {
+  update: boolean;
+
+};
+
+export default function Statement ({update}:Props1) {
   const [filter, setFilter] = useState('');
   const [initialDate, setInitialDate] = useState(new Date(1900))
   const [finalDate, setFinalDate] = useState(new Date())
@@ -60,7 +65,7 @@ export default function Statement () {
           </div>
         </div>
         <div className='separator'></div>    
-        <Transaction filter={filter} initialDate={initialDate} finalDate={finalDate}/>
+        <Transaction filter={filter} initialDate={initialDate} finalDate={finalDate} update={update}/>
 
       </div>
     )

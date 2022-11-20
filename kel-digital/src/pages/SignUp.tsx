@@ -18,7 +18,7 @@ function SignUp() {
   const [alertMessage, setAlertMessage] = useState('')
 
   useEffect(() => {
-    const passwordREGEX = /(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$)/
+    const passwordREGEX = /(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$)/
     if (account.username.length >= 3){
       setUsernameCheck(true)
     }

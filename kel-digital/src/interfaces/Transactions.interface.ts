@@ -5,7 +5,7 @@ export default interface TransactionI {
   debitedAccountId?:number;
   createdAt?:string;
   type?:string;
-  otherUsername?:number;
+  otherUsername?:number | string;
 }
 
  export default interface TransactionsI {

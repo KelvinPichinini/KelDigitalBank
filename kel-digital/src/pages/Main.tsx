@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import '../App.css';
 import Header from '../components/Header';
-import Statement from '../components/Statement';
 import TransferFunds from '../components/TransferFunds';
 import { getUserInfo } from '../services/requisitions';
 
@@ -32,7 +31,7 @@ function Main() {
     <div className="main">
       <Header />
       <TransferFunds />
-      <Statement />
+      
     </div>
   );
 }
