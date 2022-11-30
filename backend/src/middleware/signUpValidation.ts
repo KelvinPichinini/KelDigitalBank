@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 export const signUpValidation = async (req:Request, res:Response, next:NextFunction) => {
   const { username, password } = req.body;
-  const passwordREGEX = /(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$)/
+  const passwordREGEX = /(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$)/
   if (!(username && password)) {
     return res.status(400).json({ message:'Faltando informação de login ou password'})
   }

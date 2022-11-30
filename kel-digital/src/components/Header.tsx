@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import logo from '../logo.svg'
 
 export default function Header () {
   const [className, setClassName] = useState(' hidden')
   const [uname, setUname] = useState('')
+  const [redirect, setRedirect] = useState(false)
   const location = useLocation();
 
   useEffect( () => {
@@ -21,8 +22,12 @@ export default function Header () {
 
   const handleClick = () => {
     localStorage.removeItem('user');
+    setRedirect(true)
   }
-
+  
+  if(redirect) {
+    return (<Navigate to='/' replace={true}/>)
+  }
     return (
       <div className='App-header'>
         <a href="/"><img src={logo} className="App-logo" alt="logo" /></a>

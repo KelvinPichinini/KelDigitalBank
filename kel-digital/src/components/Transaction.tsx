@@ -9,14 +9,19 @@ type TransactionProps = {
   filter: string;
   initialDate: Date;
   finalDate: Date;
+  update:boolean
 };
 
-export default function Transaction({filter, initialDate, finalDate}: TransactionProps) {
+export default function Transaction({filter, initialDate, finalDate, update}: TransactionProps) {
   const [transactions, setTransactions] = useState<TransactionsI>()
   const [filteredT, setFilteredT] = useState<TransactionI[]>()
   const [redirect, setRedirect] = useState(false)
   const [userId, setUserId] = useState<number>()
   const [consolidatedTrans, setConsolidatedTrans] = useState<TransactionI[]>()
+
+  
+
+  
 
   useEffect( () => {
     if(!localStorage.getItem('user')){
@@ -31,7 +36,6 @@ export default function Transaction({filter, initialDate, finalDate}: Transactio
         }
       }
       getTransactions()
-
       const id = parseInt(JSON.parse(localStorage.getItem('user') as string).id)
       setUserId(id)
       const filterTransactions = async () => {
@@ -43,10 +47,12 @@ export default function Transaction({filter, initialDate, finalDate}: Transactio
             if( createdDate >= initialDate && createdDate<=finalDate){
               if(element.debitedAccountId === userId){
                 element.type = 'Debito';
-                element.otherUsername = element.creditedAccountId
+                const res = await getUserByAccountId(element.creditedAccountId as number)
+                element.otherUsername = res.data
               } else {
                 element.type = 'Credito'
-                element.otherUsername = element.debitedAccountId
+                const res = await getUserByAccountId(element.debitedAccountId as number)
+                element.otherUsername = res.data
               }
               newTransactions.push(element)
             }
@@ -80,7 +86,7 @@ export default function Transaction({filter, initialDate, finalDate}: Transactio
       filterTransactions()
     }
 
-  }, [filter,finalDate,initialDate,userId, transactions])
+  }, [filter,finalDate,initialDate,update ])
 
   if(redirect) {
     return (<Navigate to='/' replace={true}/>)
@@ -102,7 +108,7 @@ export default function Transaction({filter, initialDate, finalDate}: Transactio
                 <td key={item.id? item.id + 1 : i}>{item.type}</td>
                 <td key={item.id? item.id + 2 : i} className={item.type}>{item.value}</td>
                 <td key={item.id? item.id + 3 : i}>{item.otherUsername}</td>
-                <td key={item.id? item.id + 4 : i}>{new Date(item.createdAt as string).toLocaleDateString()}</td>
+                <td key={item.id? item.id + 4 : i}>{new Date(item.createdAt as string).toLocaleDateString('pt-br')}</td>
               </tr >
             ))}
           </tbody>
