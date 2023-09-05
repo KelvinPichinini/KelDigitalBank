@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "",
-    "start": "npm run build && node ./build/index.js",
+    "start": "npm run build && npm run db:create && node ./build/index.js",
     "dev": "tsnd ./src/index.ts",
     "build": "tsc",
     "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npm run db:create",

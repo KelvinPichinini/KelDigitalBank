@@ -24,6 +24,7 @@ services:
       - DB_HOST=db
       - DB_NAME=KelDigitalBank
       - DB_PORT=5432
+      - SECRET=SegredoSeguro
     volumes:
       - ./backend:/app-back
 
